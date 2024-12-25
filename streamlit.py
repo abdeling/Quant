@@ -68,13 +68,46 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 
 # Calculate Option Price
 
+import streamlit as st
+
+# Option pricing function (for illustration)
+def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
+    # This is a placeholder function for option pricing logic
+    # Replace this with your actual logic to calculate option price and delta
+    price = 100  # Example price
+    delta = 0.5  # Example delta
+    return {"price": price, "delta": delta}
+
+# Option parameters (for example)
+S0 = 100  # Stock price
+K = 100   # Strike price
+T = 1     # Time to maturity
+r = 0.05  # Risk-free rate
+sigma = 0.2  # Volatility
+steps = 100  # Steps in the binomial tree
+option_style = "american"  # Option style (e.g., european, american)
+
+# Get call and put prices and deltas
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
 put_price = put["price"]
 put_delta = put["delta"]
+
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 call_price = call["price"]
 call_delta = call["delta"]
-st.metric(label=f"{option_style.capitalize()} Call Price", value=f"${call_price:.4f}")
-st.metric(label=f"{option_style.capitalize()} Call delta", value=f"${call_delta:.4f}")
-st.metric(label=f"{option_style.capitalize()} Put Price", value=f"${put_price:.4f}")
-st.metric(label=f"{option_style.capitalize()} Put delta", value=f"${put_delta:.4f}")
+
+# Create a two-column layout for the metrics
+col1, col2 = st.columns(2)
+
+# Category for Call Options
+with col1:
+    st.markdown(f"### {option_style.capitalize()} Call Option")
+    st.metric(label=f"Call Price", value=f"${call_price:.4f}")
+    st.metric(label=f"Call Delta", value=f"{call_delta:.4f}")
+
+# Category for Put Options
+with col2:
+    st.markdown(f"### {option_style.capitalize()} Put Option")
+    st.metric(label=f"Put Price", value=f"${put_price:.4f}")
+    st.metric(label=f"Put Delta", value=f"{put_delta:.4f}")
+
