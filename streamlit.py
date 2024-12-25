@@ -91,19 +91,20 @@ col1, col2 = st.columns(2)
 st.markdown(
     """
     <style>
-    /* Adjusting the width of columns */
-    .stColumn {
-        max-width: 100px;
+    /* Reduce font size of markdown headers */
+    h3 {
+        font-size: 18px; /* Adjust size for markdown titles */
     }
-    
+
     /* Styling the metrics to make them smaller */
-    .css-1v0mbdj {
-        font-size: 5px;  /* Smaller font size for metric labels */
-        padding: 3px;     /* Reduce padding around metrics */
+    .stMetricLabel {
+        font-size: 14px;  /* Smaller font size for metric labels */
     }
-    
-    .css-15zrgzk {
-        font-size: 5px;  /* Smaller font size for metric values */
+    .stMetricValue {
+        font-size: 16px;  /* Smaller font size for metric values */
+    }
+    .stColumn {
+        max-width: 200px; /* Reduce column width */
     }
     </style>
     """, 
