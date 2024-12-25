@@ -121,12 +121,12 @@ with col1:
     st.metric(label=f"Call Price", value=f"${call_price:.4f}")
     st.metric(label=f"Call Delta", value=f"{call_delta:.4f}")
     st.metric(label=f"Call Gamma", value=f"{call_gamma:.4f}")
-    st.metric(label=f"Call Theta", value=f"{2*dt:.4f}")
+    st.metric(label=f"Call Theta", value=f"{call_theta:.4f}")
 
 # Category for Put Options
 with col2:
     st.markdown(f"### {option_style.capitalize()} Put Option")
     st.metric(label=f"Put Price", value=f"${put_price:.4f}")
     st.metric(label=f"Put Delta", value=f"{put_delta:.4f}")
-    st.metric(label=f"Put Theta", value=f"{2*dt:.4f}")
+    st.metric(label=f"Put Theta", value=f"{put_theta:.4f}")
 
