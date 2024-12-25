@@ -56,7 +56,7 @@ st.title("American Option Pricing Dashboard")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
-S0 = st.sidebar.number_input("Initial Stock Price (S0)", value=100, format="%.2f")
+S0 = st.sidebar.number_input("Initial Stock Price (S0)", value=100.00, format="%.2f")
 K = st.sidebar.number_input("Strike Price (K)", value=90.0, format="%.2f")
 T = st.sidebar.number_input("Time to Maturity (T, years)", value=1.5, format="%.2f")
 r = st.sidebar.number_input("Risk-Free Rate (r)", value=0.05, format="%.5f")
