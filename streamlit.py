@@ -87,23 +87,23 @@ call_gamma = call["gamma"]
 call_theta = call["theta"]
 
 # Create a two-column layout for the metrics
-col1, col2 = st.columns(4)
+col1, col2 = st.columns(2)
 st.markdown(
     """
     <style>
     /* Adjusting the width of columns */
     .stColumn {
-        max-width: 300px;
+        max-width: 100px;
     }
     
     /* Styling the metrics to make them smaller */
     .css-1v0mbdj {
-        font-size: 14px;  /* Smaller font size for metric labels */
-        padding: 5px;     /* Reduce padding around metrics */
+        font-size: 10px;  /* Smaller font size for metric labels */
+        padding: 3px;     /* Reduce padding around metrics */
     }
     
     .css-15zrgzk {
-        font-size: 12px;  /* Smaller font size for metric values */
+        font-size: 9px;  /* Smaller font size for metric values */
     }
     </style>
     """, 
