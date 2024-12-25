@@ -54,6 +54,7 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
 
     return({"price" : Payoffs[0] , "delta" : delta , "gamma" : gamma , "theta" : theta })
 
+
 # Streamlit App
 st.title("American Option Pricing Dashboard")
 
@@ -67,62 +68,31 @@ sigma = st.sidebar.number_input("Volatility (σ)", value=0.2, format="%.4f")
 steps = st.sidebar.number_input("Number of Steps in Binomial Tree", value=4, min_value=1, step=1)
 
 option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
-#option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
 
-# Calculate Option Price
+# Function for Option Pricing (Already Defined Above)
+# ...
 
-
-
-# Get call and put prices and deltas
+# Get call and put prices and Greeks
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
-put_price = put["price"]
-put_delta = put["delta"]
-put_gamma = put["gamma"]
-put_theta = put["theta"]
-
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
-call_price = call["price"]
-call_delta = call["delta"]
-call_gamma = call["gamma"]
-call_theta = call["theta"]
 
-# Create a two-column layout for the metrics
-col1, col2 = st.columns(2)
-st.markdown(
-    """
-    <style>
-    /* Reduce font size of markdown headers */
-    h3 {
-        font-size: 18px; /* Adjust size for markdown titles */
-    }
-
-    /* Styling the metrics to make them smaller */
-    .stMetricLabel {
-        font-size: 14px;  /* Smaller font size for metric labels */
-    }
-    .stMetricValue {
-        font-size: 16px;  /* Smaller font size for metric values */
-    }
-    .stColumn {
-        max-width: 200px; /* Reduce column width */
-    }
-    </style>
-    """, 
-    unsafe_allow_html=True
-)
-# Category for Call Options
-with col1:
+# Display Metrics in Separate Containers
+with st.container():
     st.markdown(f"### {option_style.capitalize()} Call Option")
-    st.metric(label=f"Call Price", value=f"${call_price:.4f}")
-    st.metric(label=f"Call Delta", value=f"{call_delta:.4f}")
-    st.metric(label=f"Call Gamma", value=f"{call_gamma:.4f}")
-    st.metric(label=f"Call Theta", value=f"{call_theta:.4f}")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label="Call Price", value=f"${call['price']:.4f}")
+        st.metric(label="Call Delta", value=f"{call['delta']:.4f}")
+    with col2:
+        st.metric(label="Call Gamma", value=f"{call['gamma']:.4f}")
+        st.metric(label="Call Theta", value=f"{call['theta']:.4f}")
 
-# Category for Put Options
-with col2:
+with st.container():
     st.markdown(f"### {option_style.capitalize()} Put Option")
-    st.metric(label=f"Put Price", value=f"${put_price:.4f}")
-    st.metric(label=f"Put Delta", value=f"{put_delta:.4f}")
-    st.metric(label=f"Put Gamma", value=f"{put_gamma:.4f}")
-    st.metric(label=f"Put Theta", value=f"{put_theta:.4f}")
-
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label="Put Price", value=f"${put['price']:.4f}")
+        st.metric(label="Put Delta", value=f"{put['delta']:.4f}")
+    with col2:
+        st.metric(label="Put Gamma", value=f"{put['gamma']:.4f}")
+        st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
