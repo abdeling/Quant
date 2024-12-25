@@ -92,7 +92,7 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
 
 # Calculate Option Price
-if st.button("Calculate Option Price"):
-    price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)
-    st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.2f}")
+
+price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)
+st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.2f}")
 
