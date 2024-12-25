@@ -87,7 +87,7 @@ call_gamma = call["gamma"]
 call_theta = call["theta"]
 
 # Create a two-column layout for the metrics
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(4)
 st.markdown(
     """
     <style>
