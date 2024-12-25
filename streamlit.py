@@ -41,9 +41,17 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
         Payoffs = interm
         if i==1 :
             deltas = Payoffs
+        if i==2 :
+            gammas = Payoffs
     delta = (deltas[1]-deltas[0])/(Stock_Prices[1][1]-Stock_Prices[1][0])
+    h = 0.5*(Stock_Prices[2][0]-Stock_Prices[2][2])
+    h1 = Stock_Prices[2][0]-Stock_Prices[2][1]
+    h2 = Stock_Prices[2][1]-Stock_Prices[2][2]
+    f1 = gammas[2]-gammas[1]
+    f2 = gammas[1]-gammas[0]
+    gamma  = (f1/h1-f2/h2)/h
 
-    return({"price" : Payoffs[0] , "delta" : delta})
+    return({"price" : Payoffs[0] , "delta" : delta , "gamma" : gamma })
 
 
 
@@ -74,10 +82,12 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
 put_price = put["price"]
 put_delta = put["delta"]
+put_gamma = put["gamma"]
 
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 call_price = call["price"]
 call_delta = call["delta"]
+call_gamma = call["gamma"]
 
 # Create a two-column layout for the metrics
 col1, col2 = st.columns(2)
@@ -107,10 +117,12 @@ with col1:
     st.markdown(f"### {option_style.capitalize()} Call Option")
     st.metric(label=f"Call Price", value=f"${call_price:.4f}")
     st.metric(label=f"Call Delta", value=f"{call_delta:.4f}")
+    st.metric(label=f"Call Gamma", value=f"{call_gamma:.4f}")
 
 # Category for Put Options
 with col2:
     st.markdown(f"### {option_style.capitalize()} Put Option")
     st.metric(label=f"Put Price", value=f"${put_price:.4f}")
     st.metric(label=f"Put Delta", value=f"{put_delta:.4f}")
+    st.metric(label=f"Put Gamma", value=f"{put_gamma:.4f}")
 
