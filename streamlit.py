@@ -50,13 +50,6 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
 
 
 
-# In[6]:
-
-
-
-
-# In[9]:
-
 
 # Streamlit App
 st.title("American Option Pricing Dashboard")
@@ -71,13 +64,18 @@ sigma = st.sidebar.number_input("Volatility (σ)", value=0.1365, format="%.4f")
 steps = st.sidebar.number_input("Number of Steps in Binomial Tree", value=4, min_value=1, step=1)
 
 option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
-option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
+#option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
 
 # Calculate Option Price
 
-price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["price"]
+put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
+put_price = put["price"]
+put_delta = put["delta"]
+call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
+call_price = call["price"]
+call_delta = call["delta"]
 delta = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["delta"]
-st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.4f}")
-st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Delta", value=f"${delta:.4f}")
-
-
+st.metric(label=f"{option_style.capitalize()} Call Price", value=f"${call_price:.4f}")
+st.metric(label=f"{option_style.capitalize()} Call delta", value=f"${call_delta:.4f}")
+st.metric(label=f"{option_style.capitalize()} Put Price", value=f"${put_price:.4f}")
+st.metric(label=f"{option_style.capitalize()} Put delta", value=f"${put_delta:.4f}")
