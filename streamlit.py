@@ -1,14 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
+# In[5]:
 
-# ## streamlit
-# 
-# New notebook
-
-# In[8]:
-
-
-#!pip install streamlit
 import math
 import numpy as np
 import streamlit as st
@@ -48,12 +39,11 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
                 elif option_type=="put" :
                     interm.append(np.max([K - Stock_Prices[i][j], math.exp(-r * dt) * (p * Payoffs[j] + q * Payoffs[j + 1])]))
         Payoffs = interm
+        if i==1 :
+            deltas = Payoffs
+    delta = (deltas[1]-deltas[0])/(Stock_Prices[1][1]-Stock_Prices[1][0])
 
-    return(Payoffs[0])
-
-
-
-
+    return({"price" : Payoffs[0] , "delta" : delta})
 
 
 
@@ -63,21 +53,13 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
 # In[6]:
 
 
-S0 = 57.48  # Initial stock price
-K = 50  # Strike price
-T = 1  # Time to maturity (1 year)
-r = 0.04313  # Risk-free rate (5%)
-sigma = 0.1365  # Volatility (20%)
-steps = 4  # Number of steps in the binomial tree
-
-option_price(S0, K, T, r, sigma, steps,option_style ="american" ,option_type="put")
 
 
 # In[9]:
 
 
 # Streamlit App
-st.title("American Option Pricing Test33 Dashboard")
+st.title("American Option Pricing Dashboard")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
@@ -93,6 +75,9 @@ option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
 
 # Calculate Option Price
 
-price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)
+price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["price"]
+delta = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["delta"]
 st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.2f}")
+st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Delta", value=f"${price:.2f}")
+
 
