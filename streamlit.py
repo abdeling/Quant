@@ -91,7 +91,7 @@ with st.container(border = True):
 
 with st.container(border = True):
     st.markdown(f"### {option_style.capitalize()} Put Option")
-    col1, col2,col3,col4 = st.columns(2)
+    col1, col2,col3,col4 = st.columns(4)
     with col1:
         st.metric(label="Put Price", value=f"${put['price']:.4f}")
     with col2:
