@@ -74,7 +74,6 @@ put_delta = put["delta"]
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 call_price = call["price"]
 call_delta = call["delta"]
-delta = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["delta"]
 st.metric(label=f"{option_style.capitalize()} Call Price", value=f"${call_price:.4f}")
 st.metric(label=f"{option_style.capitalize()} Call delta", value=f"${call_delta:.4f}")
 st.metric(label=f"{option_style.capitalize()} Put Price", value=f"${put_price:.4f}")
