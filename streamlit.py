@@ -51,7 +51,7 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
     f2 = gammas[1]-gammas[0]
     gamma  = (f1/h1-f2/h2)/h
 
-    return({"price" : Payoffs[0] , "delta" : delta , "gamma" : gamma })
+    return({"price" : Payoffs[0] , "delta" : delta , "gamma" : h })
 
 
 
