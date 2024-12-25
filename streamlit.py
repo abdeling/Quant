@@ -77,7 +77,7 @@ option_type = st.sidebar.selectbox("Option Type", ["put", "call"])
 
 price = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["price"]
 delta = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type=option_type)["delta"]
-st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.2f}")
-st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Delta", value=f"${delta:.2f}")
+st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Price", value=f"${price:.4f}")
+st.metric(label=f"{option_style.capitalize()} {option_type.capitalize()} Option Delta", value=f"${delta:.4f}")
 
 
