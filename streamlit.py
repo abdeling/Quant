@@ -98,12 +98,12 @@ st.markdown(
     
     /* Styling the metrics to make them smaller */
     .css-1v0mbdj {
-        font-size: 10px;  /* Smaller font size for metric labels */
+        font-size: 5px;  /* Smaller font size for metric labels */
         padding: 3px;     /* Reduce padding around metrics */
     }
     
     .css-15zrgzk {
-        font-size: 9px;  /* Smaller font size for metric values */
+        font-size: 5px;  /* Smaller font size for metric values */
     }
     </style>
     """, 
