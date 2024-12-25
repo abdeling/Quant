@@ -77,22 +77,26 @@ put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 
 # Display Metrics in Separate Containers
-with st.container():
+with st.container(border = True):
     st.markdown(f"### {option_style.capitalize()} Call Option")
-    col1, col2 = st.columns(2)
+    col1, col2,col3,col4 = st.columns(4)
     with col1:
         st.metric(label="Call Price", value=f"${call['price']:.4f}")
-        st.metric(label="Call Delta", value=f"{call['delta']:.4f}")
     with col2:
+        st.metric(label="Call Delta", value=f"{call['delta']:.4f}")
+    with col3:
         st.metric(label="Call Gamma", value=f"{call['gamma']:.4f}")
+    with col4:
         st.metric(label="Call Theta", value=f"{call['theta']:.4f}")
 
-with st.container():
+with st.container(border = True):
     st.markdown(f"### {option_style.capitalize()} Put Option")
-    col1, col2 = st.columns(2)
+    col1, col2,col3,col4 = st.columns(2)
     with col1:
         st.metric(label="Put Price", value=f"${put['price']:.4f}")
-        st.metric(label="Put Delta", value=f"{put['delta']:.4f}")
     with col2:
+        st.metric(label="Put Delta", value=f"{put['delta']:.4f}")
+    with col3:
         st.metric(label="Put Gamma", value=f"{put['gamma']:.4f}")
+    with col4:
         st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
