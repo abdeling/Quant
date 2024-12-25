@@ -77,7 +77,7 @@ option_price(S0, K, T, r, sigma, steps,option_style ="american" ,option_type="pu
 
 
 # Streamlit App
-st.title("American Option Pricing Dashboard")
+st.title("American Option Pricing Test Dashboard")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
