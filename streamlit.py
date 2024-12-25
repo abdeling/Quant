@@ -50,8 +50,9 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
     f1 = gammas[2]-gammas[1]
     f2 = gammas[1]-gammas[0]
     gamma  = (f1/h2-f2/h1)/h
+    theta = (gammas[1]-Payoffs[0])/(2*dt)
 
-    return({"price" : Payoffs[0] , "delta" : delta , "gamma" : gamma })
+    return({"price" : Payoffs[0] , "delta" : delta , "gamma" : gamma , "theta" : theta })
 
 
 
@@ -83,11 +84,13 @@ put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_
 put_price = put["price"]
 put_delta = put["delta"]
 put_gamma = put["gamma"]
+put_theta = put["theta"]
 
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 call_price = call["price"]
 call_delta = call["delta"]
 call_gamma = call["gamma"]
+call_theta = call["theta"]
 
 # Create a two-column layout for the metrics
 col1, col2 = st.columns(2)
@@ -118,11 +121,12 @@ with col1:
     st.metric(label=f"Call Price", value=f"${call_price:.4f}")
     st.metric(label=f"Call Delta", value=f"{call_delta:.4f}")
     st.metric(label=f"Call Gamma", value=f"{call_gamma:.4f}")
+    st.metric(label=f"Call Theta", value=f"{call_theta:.4f}")
 
 # Category for Put Options
 with col2:
     st.markdown(f"### {option_style.capitalize()} Put Option")
     st.metric(label=f"Put Price", value=f"${put_price:.4f}")
     st.metric(label=f"Put Delta", value=f"{put_delta:.4f}")
-    st.metric(label=f"Put Gamma", value=f"{put_gamma:.4f}")
+    st.metric(label=f"Put Theta", value=f"{put_theta:.4f}")
 
