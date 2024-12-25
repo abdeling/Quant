@@ -78,15 +78,6 @@ def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
     delta = 0.5  # Example delta
     return {"price": price, "delta": delta}
 
-# Option parameters (for example)
-S0 = 100  # Stock price
-K = 100   # Strike price
-T = 1     # Time to maturity
-r = 0.05  # Risk-free rate
-sigma = 0.2  # Volatility
-steps = 100  # Steps in the binomial tree
-option_style = "american"  # Option style (e.g., european, american)
-
 # Get call and put prices and deltas
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
 put_price = put["price"]
