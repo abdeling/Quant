@@ -68,15 +68,6 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 
 # Calculate Option Price
 
-import streamlit as st
-
-# Option pricing function (for illustration)
-def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
-    # This is a placeholder function for option pricing logic
-    # Replace this with your actual logic to calculate option price and delta
-    price = 100  # Example price
-    delta = 0.5  # Example delta
-    return {"price": price, "delta": delta}
 
 # Get call and put prices and deltas
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
