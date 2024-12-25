@@ -81,7 +81,27 @@ call_delta = call["delta"]
 
 # Create a two-column layout for the metrics
 col1, col2 = st.columns(2)
-
+st.markdown(
+    """
+    <style>
+    /* Adjusting the width of columns */
+    .stColumn {
+        max-width: 300px;
+    }
+    
+    /* Styling the metrics to make them smaller */
+    .css-1v0mbdj {
+        font-size: 14px;  /* Smaller font size for metric labels */
+        padding: 5px;     /* Reduce padding around metrics */
+    }
+    
+    .css-15zrgzk {
+        font-size: 12px;  /* Smaller font size for metric values */
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
 # Category for Call Options
 with col1:
     st.markdown(f"### {option_style.capitalize()} Call Option")
