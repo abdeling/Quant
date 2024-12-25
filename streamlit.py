@@ -56,11 +56,11 @@ st.title("American Option Pricing Dashboard")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
-S0 = st.sidebar.number_input("Initial Stock Price (S0)", value=57.48, format="%.2f")
-K = st.sidebar.number_input("Strike Price (K)", value=50.0, format="%.2f")
-T = st.sidebar.number_input("Time to Maturity (T, years)", value=1.0, format="%.2f")
-r = st.sidebar.number_input("Risk-Free Rate (r)", value=0.04313, format="%.5f")
-sigma = st.sidebar.number_input("Volatility (σ)", value=0.1365, format="%.4f")
+S0 = st.sidebar.number_input("Initial Stock Price (S0)", value=100, format="%.2f")
+K = st.sidebar.number_input("Strike Price (K)", value=90.0, format="%.2f")
+T = st.sidebar.number_input("Time to Maturity (T, years)", value=1.5, format="%.2f")
+r = st.sidebar.number_input("Risk-Free Rate (r)", value=0.05, format="%.5f")
+sigma = st.sidebar.number_input("Volatility (σ)", value=0.2, format="%.4f")
 steps = st.sidebar.number_input("Number of Steps in Binomial Tree", value=4, min_value=1, step=1)
 
 option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
@@ -68,6 +68,15 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 
 # Calculate Option Price
 
+import streamlit as st
+
+# Option pricing function (for illustration)
+def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
+    # This is a placeholder function for option pricing logic
+    # Replace this with your actual logic to calculate option price and delta
+    price = 100  # Example price
+    delta = 0.5  # Example delta
+    return {"price": price, "delta": delta}
 
 # Get call and put prices and deltas
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
