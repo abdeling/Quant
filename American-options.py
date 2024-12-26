@@ -136,12 +136,13 @@ with st.container():
     call_values, put_values = [], []
 
     # Calculate values for Call and Put options
-    if visualization == "Delta":
-        call_values = np.array([delta(s, K, T, r, sigma, steps,option_style =option_style ,option_type="Call") for s in spot_prices])
-        put_values.append(delta(spot, K, T, r, sigma, steps, option_style, "put"))
-    elif visualization == "Gamma":
-        call_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
-        put_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "put"))
+    for spot in spot_prices:
+        if visualization == "Delta":
+            call_values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
+            put_values.append(delta(spot, K, T, r, sigma, steps, option_style, "put"))
+        elif visualization == "Gamma":
+            call_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
+            put_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "put"))
 
     # Create the plot using Plotly
     fig = go.Figure()
