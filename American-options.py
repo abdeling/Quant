@@ -114,24 +114,22 @@ def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
 ###################################
 ###################################
 
-# Create a container with columns for visualization and controls
+# Create a container for the visualization and controls
+st.markdown("### Graph Options")
+
+# Radio button for choosing Call, Put, or Both (above the graph)
+option_type = st.radio(
+    "Option Type to Plot:",
+    ["Call", "Put", "Both"],
+    horizontal=True  # Display radio buttons horizontally
+)
+
+# Create columns for the controls and the plot
 col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
 
 with col_controls:
     # Controls for the plot
-    st.markdown("### Graph Options")
-    
-    # Radio button for choosing Call, Put, or Both
-    option_type = st.radio(
-        "Option Type to Plot:",
-        ["Call", "Put", "Both"],
-        horizontal=False  # Display radio buttons vertically
-    )
-
-    # Selectbox for metric choice
     visualization = st.selectbox("Metric to Plot:", ["Delta", "Gamma"])
-
-    # Inputs for spot price range and number of points
     S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
     S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
     num_points = st.number_input("Number of Points:", value=50, min_value=10, step=1)
