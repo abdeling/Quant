@@ -116,46 +116,45 @@ def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
 
 ###################################
 
-# Interactive Visual
-st.sidebar.header("Visualization Options")
-visualization = st.sidebar.selectbox("Choose Metric to Plot", ["Delta", "Gamma"])
+# Create a container for the visualization and controls
+with st.container():
+    # Row layout with columns for controls
+    col1, col2 = st.columns([2, 6])  # Adjust the column ratio as needed
 
-# Spot price range for the plot
-S0_min = st.sidebar.number_input("Minimum Spot Price", value=50.0, format="%.2f")
-S0_max = st.sidebar.number_input("Maximum Spot Price", value=150.0, format="%.2f")
-num_points = st.sidebar.number_input("Number of Points", value=50, min_value=10, step=1)
+    with col1:
+        # Add input elements to the first column
+        visualization = st.selectbox("Choose Metric to Plot", ["Delta", "Gamma"])
+        S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
+        S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
+        num_points = st.number_input("Number of Points", value=50, min_value=10, step=1)
 
-# Generate data for the plot
-spot_prices = np.linspace(S0_min, S0_max, num_points)
-values = []
+    with col2:
+        # Generate data for the plot
+        spot_prices = np.linspace(S0_min, S0_max, num_points)
+        values = []
 
-for spot in spot_prices:
-    if visualization == "Delta":
-        values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
-    elif visualization == "Gamma":
-        values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
+        for spot in spot_prices:
+            if visualization == "Delta":
+                values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
+            elif visualization == "Gamma":
+                values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
 
-# Create the plot using Plotly
-fig = go.Figure()
-fig.add_trace(
-    go.Scatter(
-        x=spot_prices,
-        y=values,
-        mode="lines",
-        name=f"{visualization} (Call Option)"
-    )
-)
-fig.update_layout(
-    title=f"{visualization} as a Function of Spot Price",
-    xaxis_title="Spot Price",
-    yaxis_title=f"{visualization}",
-    template="plotly_white"
-)
+        # Create the plot using Plotly
+        fig = go.Figure()
+        fig.add_trace(
+            go.Scatter(
+                x=spot_prices,
+                y=values,
+                mode="lines",
+                name=f"{visualization} (Call Option)"
+            )
+        )
+        fig.update_layout(
+            title=f"{visualization} as a Function of Spot Price",
+            xaxis_title="Spot Price",
+            yaxis_title=f"{visualization}",
+            template="plotly_white"
+        )
 
-# Display the plot
-st.plotly_chart(fig)
-
-
-
-
-
+        # Display the plot
+        st.plotly_chart(fig)
