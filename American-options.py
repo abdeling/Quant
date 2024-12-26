@@ -81,10 +81,11 @@ call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option
 
 # Display Metrics in Separate Containers
 with st.container(border = True):
-    st.header(f"### {option_style.capitalize()} Call Option")
+    st.markdown(f"### {option_style.capitalize()} Call Option")
     col1, col2,col3,col4 = st.columns(4)
     with col1:
         st.metric(label="Call Price", value=f"${call['price']:.4f}")
+        col1.subheader("test")
     with col2:
         st.metric(label="Call Delta", value=f"{call['delta']:.4f}")
     with col3:
