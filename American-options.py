@@ -152,8 +152,8 @@ with col_plot:
         call_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
         put_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
     elif visualization == "Theta":
-        call_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
-        put_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
+        call_values = np.array([theta(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
+        put_values = np.array([theta(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
 
     # Create the plot using Plotly
     fig = go.Figure()
