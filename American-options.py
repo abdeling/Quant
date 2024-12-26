@@ -183,7 +183,7 @@ with col_plot:
             put_values = np.array([delta(S0, k, T, r, sigma,steps, option_style=option_style, option_type="put") for k in x_values])
         elif visualization == "Gamma":
             call_values = np.array([gamma(S0, k, T, r, sigma,steps, option_style=option_style, option_type="call") for k in x_values])
-            put_values = np.array([gamma(S0, k, T, r, sigma, option_style=option_style, option_type="put") for k in x_values])
+            put_values = np.array([gamma(S0, k, T, r, sigma, steps,option_style=option_style, option_type="put") for k in x_values])
         elif visualization == "Theta":
             call_values = np.array([theta(S0, k, T, r, sigma,steps, option_style=option_style, option_type="call") for k in x_values])
             put_values = np.array([theta(S0, k, T, r, sigma, steps,option_style=option_style, option_type="put") for k in x_values])
