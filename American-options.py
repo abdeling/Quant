@@ -149,12 +149,7 @@ with col_controls:
     # Define common min and max values for x-axis
     X_min = st.number_input("Minimum X Value", value=50.0, format="%.2f")
     X_max = st.number_input("Maximum X Value", value=150.0, format="%.2f")
-    
-    # Define values for K, r, T, sigma which will not change unless specified
-    K = st.number_input("Strike Price (K)", value=100.0, format="%.2f")
-    r = st.number_input("Interest Rate (r)", value=0.05, format="%.4f")
-    T = st.number_input("Time to Maturity (T)", value=1.0, format="%.2f")
-    sigma = st.number_input("Volatility (sigma)", value=0.2, format="%.2f")
+
     
     num_points = st.number_input("Number of Points:", value=50, min_value=10, step=1)
 
