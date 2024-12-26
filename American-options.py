@@ -117,7 +117,11 @@ def theta(S0, K, T, r, sigma, steps, option_style, option_type):
 
 
 ###################################
-###################################
+import streamlit as st
+import numpy as np
+import plotly.graph_objects as go
+
+# Assuming the option pricing functions (delta, gamma, theta) are defined elsewhere.
 
 # Create a container for the visualization and controls
 st.markdown("### Graph Options")
@@ -134,26 +138,97 @@ col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
 
 with col_controls:
     # Controls for the plot
-    visualization = st.selectbox("Metric to Plot:", ["Delta", "Gamma","Theta"])
-    S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
-    S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
+    visualization = st.selectbox("Metric to Plot:", ["Delta", "Gamma", "Theta"])
+    
+    # Control for selecting the x-axis variable
+    x_axis_variable = st.selectbox(
+        "Choose the Variable for X-Axis:",
+        ["Spot Price (S0)", "Strike Price (K)", "Interest Rate (r)", "Time to Maturity (T)", "Volatility (sigma)"]
+    )
+    
+    # Define common min and max values for x-axis
+    X_min = st.number_input("Minimum X Value", value=50.0, format="%.2f")
+    X_max = st.number_input("Maximum X Value", value=150.0, format="%.2f")
+    
+    # Define values for K, r, T, sigma which will not change unless specified
+    K = st.number_input("Strike Price (K)", value=100.0, format="%.2f")
+    r = st.number_input("Interest Rate (r)", value=0.05, format="%.4f")
+    T = st.number_input("Time to Maturity (T)", value=1.0, format="%.2f")
+    sigma = st.number_input("Volatility (sigma)", value=0.2, format="%.2f")
+    
     num_points = st.number_input("Number of Points:", value=50, min_value=10, step=1)
 
 with col_plot:
-    # Generate data for the plot
-    spot_prices = np.linspace(S0_min, S0_max, num_points)
-    call_values, put_values = [], []
+    # Generate data for the plot based on the selected x-axis variable
+    if x_axis_variable == "Spot Price (S0)":
+        x_values = np.linspace(X_min, X_max, num_points)
+        call_values, put_values = [], []
 
-    # Calculate values for Call and Put options
-    if visualization == "Delta":
-        call_values = np.array([delta(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
-        put_values = np.array([delta(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
-    elif visualization == "Gamma":
-        call_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
-        put_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
-    elif visualization == "Theta":
-        call_values = np.array([theta(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
-        put_values = np.array([theta(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
+        if visualization == "Delta":
+            call_values = np.array([delta(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
+            put_values = np.array([delta(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+        elif visualization == "Gamma":
+            call_values = np.array([gamma(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
+            put_values = np.array([gamma(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+        elif visualization == "Theta":
+            call_values = np.array([theta(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
+            put_values = np.array([theta(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+
+    elif x_axis_variable == "Strike Price (K)":
+        x_values = np.linspace(X_min, X_max, num_points)
+        call_values, put_values = [], []
+
+        if visualization == "Delta":
+            call_values = np.array([delta(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
+            put_values = np.array([delta(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+        elif visualization == "Gamma":
+            call_values = np.array([gamma(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
+            put_values = np.array([gamma(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+        elif visualization == "Theta":
+            call_values = np.array([theta(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
+            put_values = np.array([theta(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+
+    elif x_axis_variable == "Interest Rate (r)":
+        x_values = np.linspace(X_min, X_max, num_points)
+        call_values, put_values = [], []
+
+        if visualization == "Delta":
+            call_values = np.array([delta(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
+            put_values = np.array([delta(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+        elif visualization == "Gamma":
+            call_values = np.array([gamma(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
+            put_values = np.array([gamma(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+        elif visualization == "Theta":
+            call_values = np.array([theta(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
+            put_values = np.array([theta(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+
+    elif x_axis_variable == "Time to Maturity (T)":
+        x_values = np.linspace(X_min, X_max, num_points)
+        call_values, put_values = [], []
+
+        if visualization == "Delta":
+            call_values = np.array([delta(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
+            put_values = np.array([delta(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+        elif visualization == "Gamma":
+            call_values = np.array([gamma(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
+            put_values = np.array([gamma(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+        elif visualization == "Theta":
+            call_values = np.array([theta(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
+            put_values = np.array([theta(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+
+    elif x_axis_variable == "Volatility (sigma)":
+        x_values = np.linspace(X_min, X_max, num_points)
+        call_values, put_values = [], []
+
+        if visualization == "Delta":
+            call_values = np.array([delta(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
+            put_values = np.array([delta(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
+        elif visualization == "Gamma":
+            call_values = np.array([gamma(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
+            put_values = np.array([gamma(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
+        elif visualization == "Theta":
+            call_values = np.array([theta(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
+            put_values = np.array([theta(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
 
     # Create the plot using Plotly
     fig = go.Figure()
@@ -162,7 +237,7 @@ with col_plot:
     if option_type in ["Call", "Both"]:
         fig.add_trace(
             go.Scatter(
-                x=spot_prices,
+                x=x_values,
                 y=call_values,
                 mode="lines",
                 name="Call Option"
@@ -171,7 +246,7 @@ with col_plot:
     if option_type in ["Put", "Both"]:
         fig.add_trace(
             go.Scatter(
-                x=spot_prices,
+                x=x_values,
                 y=put_values,
                 mode="lines",
                 name="Put Option"
@@ -180,8 +255,8 @@ with col_plot:
 
     # Update layout of the plot
     fig.update_layout(
-        title=f"{visualization} as a Function of Spot Price",
-        xaxis_title="Spot Price",
+        title=f"{visualization} as a Function of {x_axis_variable}",
+        xaxis_title=x_axis_variable,
         yaxis_title=f"{visualization}",
         template="plotly_white"
     )
