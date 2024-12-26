@@ -111,6 +111,11 @@ def delta(S0, K, T, r, sigma, steps, option_style, option_type):
 def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
     return option_price(S0, K, T, r, sigma, steps, option_style, option_type)["gamma"]
 
+def theta(S0, K, T, r, sigma, steps, option_style, option_type):
+    return option_price(S0, K, T, r, sigma, steps, option_style, option_type)["theta"]
+
+
+
 ###################################
 ###################################
 
@@ -129,7 +134,7 @@ col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
 
 with col_controls:
     # Controls for the plot
-    visualization = st.selectbox("Metric to Plot:", ["Delta", "Gamma"])
+    visualization = st.selectbox("Metric to Plot:", ["Delta", "Gamma","Theta"])
     S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
     S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
     num_points = st.number_input("Number of Points:", value=50, min_value=10, step=1)
@@ -144,6 +149,9 @@ with col_plot:
         call_values = np.array([delta(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
         put_values = np.array([delta(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
     elif visualization == "Gamma":
+        call_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
+        put_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
+    elif visualization == "Theta":
         call_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="call") for s in spot_prices])
         put_values = np.array([gamma(s, K, T, r, sigma, steps, option_style=option_style, option_type="put") for s in spot_prices])
 
