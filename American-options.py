@@ -165,70 +165,70 @@ with col_plot:
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
-            put_values = np.array([delta(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+            call_values = np.array([delta(s, K, T, r, sigma, option_style, option_type="call") for s in x_values])
+            put_values = np.array([delta(s, K, T, r, sigma, option_style, option_type="put") for s in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
-            put_values = np.array([gamma(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+            call_values = np.array([gamma(s, K, T, r, sigma, option_style, option_type="call") for s in x_values])
+            put_values = np.array([gamma(s, K, T, r, sigma, option_style, option_type="put") for s in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(s, K, T, r, sigma, num_points, option_type="call") for s in x_values])
-            put_values = np.array([theta(s, K, T, r, sigma, num_points, option_type="put") for s in x_values])
+            call_values = np.array([theta(s, K, T, r, sigma, option_style, option_type="call") for s in x_values])
+            put_values = np.array([theta(s, K, T, r, sigma, option_style, option_type="put") for s in x_values])
 
     elif x_axis_variable == "Strike Price (K)":
         x_values = np.linspace(X_min, X_max, num_points)
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
-            put_values = np.array([delta(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+            call_values = np.array([delta(S0, k, T, r, sigma, option_style, option_type="call") for k in x_values])
+            put_values = np.array([delta(S0, k, T, r, sigma, option_style, option_type="put") for k in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
-            put_values = np.array([gamma(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+            call_values = np.array([gamma(S0, k, T, r, sigma, option_style, option_type="call") for k in x_values])
+            put_values = np.array([gamma(S0, k, T, r, sigma, option_style, option_type="put") for k in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(S0, k, T, r, sigma, num_points, option_type="call") for k in x_values])
-            put_values = np.array([theta(S0, k, T, r, sigma, num_points, option_type="put") for k in x_values])
+            call_values = np.array([theta(S0, k, T, r, sigma, option_style, option_type="call") for k in x_values])
+            put_values = np.array([theta(S0, k, T, r, sigma, option_style, option_type="put") for k in x_values])
 
     elif x_axis_variable == "Interest Rate (r)":
         x_values = np.linspace(X_min, X_max, num_points)
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
-            put_values = np.array([delta(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+            call_values = np.array([delta(S0, K, T, rate, sigma, option_style, option_type="call") for rate in x_values])
+            put_values = np.array([delta(S0, K, T, rate, sigma, option_style, option_type="put") for rate in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
-            put_values = np.array([gamma(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+            call_values = np.array([gamma(S0, K, T, rate, sigma, option_style, option_type="call") for rate in x_values])
+            put_values = np.array([gamma(S0, K, T, rate, sigma, option_style, option_type="put") for rate in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(S0, K, T, rate, sigma, num_points, option_type="call") for rate in x_values])
-            put_values = np.array([theta(S0, K, T, rate, sigma, num_points, option_type="put") for rate in x_values])
+            call_values = np.array([theta(S0, K, T, rate, sigma, option_style, option_type="call") for rate in x_values])
+            put_values = np.array([theta(S0, K, T, rate, sigma, option_style, option_type="put") for rate in x_values])
 
     elif x_axis_variable == "Time to Maturity (T)":
         x_values = np.linspace(X_min, X_max, num_points)
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
-            put_values = np.array([delta(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+            call_values = np.array([delta(S0, K, time, r, sigma, option_style, option_type="call") for time in x_values])
+            put_values = np.array([delta(S0, K, time, r, sigma, option_style, option_type="put") for time in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
-            put_values = np.array([gamma(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+            call_values = np.array([gamma(S0, K, time, r, sigma, option_style, option_type="call") for time in x_values])
+            put_values = np.array([gamma(S0, K, time, r, sigma, option_style, option_type="put") for time in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(S0, K, time, r, sigma, num_points, option_type="call") for time in x_values])
-            put_values = np.array([theta(S0, K, time, r, sigma, num_points, option_type="put") for time in x_values])
+            call_values = np.array([theta(S0, K, time, r, sigma, option_style, option_type="call") for time in x_values])
+            put_values = np.array([theta(S0, K, time, r, sigma, option_style, option_type="put") for time in x_values])
 
     elif x_axis_variable == "Volatility (sigma)":
         x_values = np.linspace(X_min, X_max, num_points)
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
-            put_values = np.array([delta(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
+            call_values = np.array([delta(S0, K, T, r, vol, option_style, option_type="call") for vol in x_values])
+            put_values = np.array([delta(S0, K, T, r, vol, option_style, option_type="put") for vol in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
-            put_values = np.array([gamma(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
+            call_values = np.array([gamma(S0, K, T, r, vol, option_style, option_type="call") for vol in x_values])
+            put_values = np.array([gamma(S0, K, T, r, vol, option_style, option_type="put") for vol in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(S0, K, T, r, vol, num_points, option_type="call") for vol in x_values])
-            put_values = np.array([theta(S0, K, T, r, vol, num_points, option_type="put") for vol in x_values])
+            call_values = np.array([theta(S0, K, T, r, vol, option_style, option_type="call") for vol in x_values])
+            put_values = np.array([theta(S0, K, T, r, vol, option_style, option_type="put") for vol in x_values])
 
     # Create the plot using Plotly
     fig = go.Figure()
