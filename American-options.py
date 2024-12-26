@@ -165,14 +165,14 @@ with col_plot:
         call_values, put_values = [], []
 
         if visualization == "Delta":
-            call_values = np.array([delta(s, K, T, r, sigma, option_style=option_style, option_type="call") for s in x_values])
-            put_values = np.array([delta(s, K, T, r, sigma, option_style=option_style, option_type="put") for s in x_values])
+            call_values = np.array([delta(s, K, T, r, sigma,steps, option_style=option_style, option_type="call") for s in x_values])
+            put_values = np.array([delta(s, K, T, r, sigma,steps, option_style=option_style, option_type="put") for s in x_values])
         elif visualization == "Gamma":
-            call_values = np.array([gamma(s, K, T, r, sigma, option_style=option_style, option_type="call") for s in x_values])
-            put_values = np.array([gamma(s, K, T, r, sigma, option_style=option_style, option_type="put") for s in x_values])
+            call_values = np.array([gamma(s, K, T, r, sigma,steps, option_style=option_style, option_type="call") for s in x_values])
+            put_values = np.array([gamma(s, K, T, r, sigma,steps, option_style=option_style, option_type="put") for s in x_values])
         elif visualization == "Theta":
-            call_values = np.array([theta(s, K, T, r, sigma, option_style=option_style, option_type="call") for s in x_values])
-            put_values = np.array([theta(s, K, T, r, sigma, option_style=option_style, option_type="put") for s in x_values])
+            call_values = np.array([theta(s, K, T, r, sigma,steps, option_style=option_style, option_type="call") for s in x_values])
+            put_values = np.array([theta(s, K, T, r, sigma, steps,option_style=option_style, option_type="put") for s in x_values])
 
     elif x_axis_variable == "Strike Price (K)":
         x_values = np.linspace(X_min, X_max, num_points)
