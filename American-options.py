@@ -118,43 +118,62 @@ def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
 
 # Create a container for the visualization and controls
 with st.container():
-    # Row layout with columns for controls
-    col1, col2 = st.columns([2, 6])  # Adjust the column ratio as needed
+    # Radio button for choosing Call, Put, or Both
+    option_type = st.radio(
+        "Choose Option Type to Plot",
+        ["Call", "Put", "Both"],
+        horizontal=True  # Display radio buttons horizontally
+    )
 
-    with col1:
-        # Add input elements to the first column
-        visualization = st.selectbox("Choose Metric to Plot", ["Delta", "Gamma"])
-        S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
-        S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
-        num_points = st.number_input("Number of Points", value=50, min_value=10, step=1)
+    # Other controls for the plot
+    visualization = st.selectbox("Choose Metric to Plot", ["Delta", "Gamma"])
+    S0_min = st.number_input("Minimum Spot Price", value=50.0, format="%.2f")
+    S0_max = st.number_input("Maximum Spot Price", value=150.0, format="%.2f")
+    num_points = st.number_input("Number of Points", value=50, min_value=10, step=1)
 
-    with col2:
-        # Generate data for the plot
-        spot_prices = np.linspace(S0_min, S0_max, num_points)
-        values = []
+    # Generate data for the plot
+    spot_prices = np.linspace(S0_min, S0_max, num_points)
+    call_values, put_values = [], []
 
-        for spot in spot_prices:
-            if visualization == "Delta":
-                values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
-            elif visualization == "Gamma":
-                values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
+    # Calculate values for Call and Put options
+    for spot in spot_prices:
+        if visualization == "Delta":
+            call_values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
+            put_values.append(delta(spot, K, T, r, sigma, steps, option_style, "put"))
+        elif visualization == "Gamma":
+            call_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
+            put_values.append(gamma(spot, K, T, r, sigma, steps, option_style, "put"))
 
-        # Create the plot using Plotly
-        fig = go.Figure()
+    # Create the plot using Plotly
+    fig = go.Figure()
+
+    # Add traces based on the selected option type
+    if option_type in ["Call", "Both"]:
         fig.add_trace(
             go.Scatter(
                 x=spot_prices,
-                y=values,
+                y=call_values,
                 mode="lines",
-                name=f"{visualization} (Call Option)"
+                name="Call Option"
             )
         )
-        fig.update_layout(
-            title=f"{visualization} as a Function of Spot Price",
-            xaxis_title="Spot Price",
-            yaxis_title=f"{visualization}",
-            template="plotly_white"
+    if option_type in ["Put", "Both"]:
+        fig.add_trace(
+            go.Scatter(
+                x=spot_prices,
+                y=put_values,
+                mode="lines",
+                name="Put Option"
+            )
         )
 
-        # Display the plot
-        st.plotly_chart(fig)
+    # Update layout of the plot
+    fig.update_layout(
+        title=f"{visualization} as a Function of Spot Price",
+        xaxis_title="Spot Price",
+        yaxis_title=f"{visualization}",
+        template="plotly_white"
+    )
+
+    # Display the plot
+    st.plotly_chart(fig)
