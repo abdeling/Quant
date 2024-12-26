@@ -85,13 +85,16 @@ with st.container(border = True):
     col1, col2,col3,col4 = st.columns(4)
     with col1:
         st.metric(label="Call Price", value=f"${call['price']:.4f}")
-        col1.subheader("test")
+        st.metric(label="Put Price", value=f"${put['price']:.4f}")
     with col2:
         st.metric(label="Call Delta", value=f"{call['delta']:.4f}")
+        st.metric(label="Put Delta", value=f"{put['delta']:.4f}")
     with col3:
         st.metric(label="Call Gamma", value=f"{call['gamma']:.4f}")
+        st.metric(label="Put Gamma", value=f"{put['gamma']:.4f}")
     with col4:
         st.metric(label="Call Theta", value=f"{call['theta']:.4f}")
+        st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
 
 with st.container(border = True):
     st.markdown(f"### {option_style.capitalize()} Put Option")
