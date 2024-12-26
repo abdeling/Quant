@@ -4,7 +4,7 @@ import math
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
-import plotly.graph_objects as go
+
 
 
 # In[5]:
@@ -104,9 +104,7 @@ with st.container(border = True):
         st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
 
 
-import numpy as np
-import plotly.graph_objects as go
-import streamlit as st
+
 
 # Function definitions
 def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
