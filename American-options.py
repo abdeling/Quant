@@ -3,7 +3,7 @@
 import math
 import numpy as np
 import streamlit as st
-import matplotlib.pyplot as plt
+import plotly.graph_objs as go
 
 
 
@@ -115,6 +115,47 @@ def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
     return option_price(S0, K, T, r, sigma, steps, option_style, option_type)["gamma"]
 
 ###################################
+
+# Interactive Visual
+st.sidebar.header("Visualization Options")
+visualization = st.sidebar.selectbox("Choose Metric to Plot", ["Delta", "Gamma"])
+
+# Spot price range for the plot
+S0_min = st.sidebar.number_input("Minimum Spot Price", value=50.0, format="%.2f")
+S0_max = st.sidebar.number_input("Maximum Spot Price", value=150.0, format="%.2f")
+num_points = st.sidebar.number_input("Number of Points", value=50, min_value=10, step=1)
+
+# Generate data for the plot
+spot_prices = np.linspace(S0_min, S0_max, num_points)
+values = []
+
+for spot in spot_prices:
+    if visualization == "Delta":
+        values.append(delta(spot, K, T, r, sigma, steps, option_style, "call"))
+    elif visualization == "Gamma":
+        values.append(gamma(spot, K, T, r, sigma, steps, option_style, "call"))
+
+# Create the plot using Plotly
+fig = go.Figure()
+fig.add_trace(
+    go.Scatter(
+        x=spot_prices,
+        y=values,
+        mode="lines",
+        name=f"{visualization} (Call Option)"
+    )
+)
+fig.update_layout(
+    title=f"{visualization} as a Function of Spot Price",
+    xaxis_title="Spot Price",
+    yaxis_title=f"{visualization}",
+    template="plotly_white"
+)
+
+# Display the plot
+st.plotly_chart(fig)
+
+
 
 
 
