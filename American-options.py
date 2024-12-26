@@ -59,7 +59,7 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
 
 
 # Streamlit App
-st.title("American Option Pricing Dashboard")
+st.title("Option Pricing Dashboard")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
@@ -81,7 +81,7 @@ call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option
 
 # Display Metrics in Separate Containers
 with st.container(border = True):
-    st.markdown(f"### {option_style.capitalize()} Call Option")
+    st.markdown(f"### {option_style.capitalize()} Option")
     col1, col2,col3,col4 = st.columns(4)
     with col1:
         st.metric(label="Call Price", value=f"${call['price']:.4f}")
@@ -96,17 +96,7 @@ with st.container(border = True):
         st.metric(label="Call Theta", value=f"{call['theta']:.4f}")
         st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
 
-with st.container(border = True):
-    st.markdown(f"### {option_style.capitalize()} Put Option")
-    col1, col2,col3,col4 = st.columns(4)
-    with col1:
-        st.metric(label="Put Price", value=f"${put['price']:.4f}")
-    with col2:
-        st.metric(label="Put Delta", value=f"{put['delta']:.4f}")
-    with col3:
-        st.metric(label="Put Gamma", value=f"{put['gamma']:.4f}")
-    with col4:
-        st.metric(label="Put Theta", value=f"{put['theta']:.4f}")
+
 
 def price(S0, K, T, r, sigma, steps, option_style, option_type):
     return option_price(S0, K, T, r, sigma, steps, option_style, option_type)["price"]
