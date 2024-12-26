@@ -3,8 +3,6 @@
 import math
 import numpy as np
 import streamlit as st
-import matplotlib.pyplot as plt
-import plotly.graph_objects as go
 
 
 
@@ -107,13 +105,7 @@ with st.container(border = True):
 
 
 
-# Function definitions
-def option_price(S0, K, T, r, sigma, steps, option_style, option_type):
-    # Placeholder function - Replace with actual option pricing logic
-    return {
-        "delta": 0.5 * S0 / K,  # Example placeholder formula for delta
-        "gamma": 0.2 * S0 / K   # Example placeholder formula for gamma
-    }
+
 
 def delta(S0, K, T, r, sigma, steps, option_style, option_type):
     return option_price(S0, K, T, r, sigma, steps, option_style, option_type)["delta"]
@@ -123,28 +115,5 @@ def gamma(S0, K, T, r, sigma, steps, option_style, option_type):
 
 ###################################
 
-# Data generation
-S_Start = 30
-S_End = 100
-x = np.linspace(S_Start, S_End, 1000)
-y_delta = np.array([delta(s, K, T, r, sigma, steps, option_style, option_type) for s in x])
-y_gamma = np.array([gamma(s, K, T, r, sigma, steps, option_style, option_type) for s in x])
 
-# Streamlit App
-st.title("Option Greeks Visualization")
-st.sidebar.header("Select Greek to Display")
-selected_greek = st.sidebar.selectbox("Choose Greek", ["Delta", "Gamma"])
-
-# Create Plotly figure based on selection
-fig = go.Figure()
-
-if selected_greek == "Delta":
-    fig.add_trace(go.Scatter(x=x, y=y_delta, mode='lines', name='Delta', line=dict(color='blue')))
-    fig.update_layout(title="Delta vs Stock Price", xaxis_title="Stock Price", yaxis_title="Delta Value")
-else:
-    fig.add_trace(go.Scatter(x=x, y=y_gamma, mode='lines', name='Gamma', line=dict(color='red')))
-    fig.update_layout(title="Gamma vs Stock Price", xaxis_title="Stock Price", yaxis_title="Gamma Value")
-
-# Display the chart in Streamlit
-st.plotly_chart(fig)
 
