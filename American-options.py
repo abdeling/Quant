@@ -85,7 +85,7 @@ import streamlit as st
 st.markdown(
     """
     <div style="text-align: center; margin-bottom: 20px;">
-        <h4>
+        <h5 style="font-size: 12px;">
             Created by 
             <a href="https://www.linkedin.com/in/abdelghani-bouaddi-mba-442a8966/" 
                target="_blank" style="text-decoration: none; color: #0077b5;">
@@ -95,11 +95,12 @@ st.markdown(
                style="text-decoration: none; color: #333;">
                abdelghani.bouaddi@gmail.com
             </a>
-        </h4>
+        </h5>
     </div>
     """, 
     unsafe_allow_html=True
 )
+
 
 
 # Display Metrics in Separate Containers
@@ -293,6 +294,14 @@ with col_plot:
         yaxis_title=f"{visualization}",
         template="simple_white"
     )
+
+st.subheader("Next Steps:")
+
+st.markdown("""
+1. **Make sure all formulas are correct**: Double-check the formulas used for options pricing to ensure accuracy.
+2. **Add rho and vega to the metrics**: Extend the analysis to include additional Greeks such as rho and vega. These can provide insight into sensitivity to interest rates and volatility changes.
+3. **Add evaluation using Monte Carlo and Black-Scholes for European options**: Implement Monte Carlo simulations for options pricing and compare the results with the Black-Scholes model for European options. This can offer a more flexible and computationally intensive way of valuing options.
+""")
 
     # Display the plot
     st.plotly_chart(fig)
