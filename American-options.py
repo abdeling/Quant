@@ -166,8 +166,8 @@ with col_controls:
     )
     
     # Define common min and max values for x-axis
-    X_min = st.number_input("Minimum Value on X-Axis", value=50.0, format="%.2f")
-    X_max = st.number_input("Maximum Value on X-Axis", value=150.0, format="%.2f")
+    X_min = st.number_input("Minimum Value on X-Axis", value=0.1, format="%.2f")
+    X_max = st.number_input("Maximum Value on X-Axis", value=S0*2, format="%.2f")
 
     
     num_points = st.number_input("Number of point to plot", value=50, min_value=10, step=1)
