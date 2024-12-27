@@ -146,11 +146,14 @@ import plotly.graph_objects as go
 st.markdown("### Prices and Greeks chart")
 
 # Radio button for choosing Call, Put, or Both (above the graph)
-option_type = st.radio(
-    "Option Type to Plot:",
-    ["Call", "Put", "Both"],
-    horizontal=True  # Display radio buttons horizontally
-)
+col_rad1,col_rad2,col_rad3 = st.columns(3)
+with col_rad2 :
+    
+    option_type = st.radio(
+        "Option Type to Plot:",
+        ["Call", "Put", "Both"],
+        horizontal=True  # Display radio buttons horizontally
+    )
 
 # Create columns for the controls and the plot
 col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
