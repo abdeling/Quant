@@ -159,7 +159,6 @@ with col_rad2 :
 col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
 
 with col_controls :
-    st.markdown('<div class="custom-border">This column has a border.</div>', unsafe_allow_html=True)
 
     # Controls for the plot
     visualization = st.selectbox("Metric to Plot:", ["Price","Delta", "Gamma", "Theta"])
@@ -290,6 +289,9 @@ with col_plot:
     # Update layout of the plot
     fig.update_layout(
         title=f"{visualization} as a Function of {x_axis_variable}",
+        plot_bgcolor='lightgray',  # Background color of the plot area
+        paper_bgcolor='white',  # Background color of the entire figure (including border area)
+        margin=dict(l=50, r=50, t=50, b=50),
         xaxis_title=x_axis_variable,
         yaxis_title=f"{visualization}",
         template="plotly_white"
