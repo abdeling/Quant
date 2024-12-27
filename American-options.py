@@ -79,6 +79,16 @@ option_style = st.sidebar.selectbox("Option Style", ["american", "european"])
 put = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="put")
 call = option_price(S0, K, T, r, sigma, steps, option_style=option_style, option_type="call")
 
+st.markdown(
+    """
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h4>Created by <a href="https://www.linkedin.com/in/abdelghani-bouaddi-mba-442a8966/" 
+        target="_blank" style="text-decoration: none; color: #0077b5;">Abdelghani Bouaddi</a></h4>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
+
 # Display Metrics in Separate Containers
 with st.container(border = True):
     st.markdown(f"### {option_style.capitalize()} Option")
