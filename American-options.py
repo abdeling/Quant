@@ -59,7 +59,7 @@ def option_price(S0, K, T, r, sigma, steps,option_style ="european" ,option_type
 
 
 # Streamlit App
-st.title("Option Pricing Dashboard")
+st.subheader("Option Pricing Dashboard (Binomial Model)")
 
 # User Inputs
 st.sidebar.header("Input Parameters")
