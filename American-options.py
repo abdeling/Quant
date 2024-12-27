@@ -306,5 +306,6 @@ st.markdown("""
 1. **Make sure all formulas are correct**: Double-check the formulas used for options pricing to ensure accuracy.
 2. **Add rho and vega to the metrics**: Extend the analysis to include additional Greeks such as rho and vega. These can provide insight into sensitivity to interest rates and volatility changes.
 3. **Add evaluation using Monte Carlo and Black-Scholes for European options**: Implement Monte Carlo simulations for options pricing and compare the results with the Black-Scholes model for European options. This can offer a more flexible and computationally intensive way of valuing options.
+4. **Integrate the tool with live market data to provide real-time pricing and Greeks.
 """)
 
