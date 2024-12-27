@@ -294,6 +294,11 @@ with col_plot:
         yaxis_title=f"{visualization}",
         template="simple_white"
     )
+    # Display the plot
+    st.plotly_chart(fig)
+
+
+
 
 st.subheader("Next Steps:")
 
@@ -303,5 +308,3 @@ st.markdown("""
 3. **Add evaluation using Monte Carlo and Black-Scholes for European options**: Implement Monte Carlo simulations for options pricing and compare the results with the Black-Scholes model for European options. This can offer a more flexible and computationally intensive way of valuing options.
 """)
 
-    # Display the plot
-    st.plotly_chart(fig)
