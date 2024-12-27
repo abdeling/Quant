@@ -143,7 +143,7 @@ import plotly.graph_objects as go
 # Assuming the option pricing functions (delta, gamma, theta) are defined elsewhere.
 
 # Create a container for the visualization and controls
-st.markdown("### Graph Options")
+st.markdown("### Prices and Greeks chart")
 
 # Radio button for choosing Call, Put, or Both (above the graph)
 option_type = st.radio(
@@ -161,16 +161,16 @@ with col_controls:
     
     # Control for selecting the x-axis variable
     x_axis_variable = st.selectbox(
-        "Choose the Variable for X-Axis:",
+        "Choose the Variable for X-Axis",
         ["Spot Price (S0)", "Strike Price (K)", "Interest Rate (r)", "Time to Maturity (T)", "Volatility (sigma)"]
     )
     
     # Define common min and max values for x-axis
-    X_min = st.number_input("Minimum X Value", value=50.0, format="%.2f")
-    X_max = st.number_input("Maximum X Value", value=150.0, format="%.2f")
+    X_min = st.number_input("Minimum Value on X-Axis", value=50.0, format="%.2f")
+    X_max = st.number_input("Maximum Value on X-Axis", value=150.0, format="%.2f")
 
     
-    num_points = st.number_input("Number of Points:", value=50, min_value=10, step=1)
+    num_points = st.number_input("Number of point to plot", value=50, min_value=10, step=1)
 
 with col_plot:
     # Generate data for the plot based on the selected x-axis variable
