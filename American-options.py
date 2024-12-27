@@ -260,8 +260,8 @@ with col_plot:
             call_values = np.array([theta(S0, K, T, r, vol,steps, option_style=option_style, option_type="call") for vol in x_values])
             put_values = np.array([theta(S0, K, T, r, vol, steps,option_style=option_style, option_type="put") for vol in x_values])
         elif visualization == "Price":
-            call_values = np.array([price(S0, K, time, r, sigma,steps, option_style=option_style, option_type="call") for time in x_values])
-            put_values = np.array([price(S0, K, time, r, sigma, steps,option_style=option_style, option_type="put") for time in x_values])
+            call_values = np.array([price(S0, K, T, r, vol,steps, option_style=option_style, option_type="call") for vol in x_values])
+            put_values = np.array([price(S0, K, T, r, vol, steps,option_style=option_style, option_type="put") for vol in x_values])
 
     # Create the plot using Plotly
     fig = go.Figure()
