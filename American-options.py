@@ -175,7 +175,7 @@ with col_controls :
     X_max = st.number_input("Maximum Value on X-Axis", value=S0*2, format="%.2f")
 
     
-    num_points = st.number_input("Number of point to plot", value=50, min_value=10, step=1)
+    num_points = st.number_input("Number of points to plot", value=50, min_value=10, step=1)
 
 with col_plot:
     # Generate data for the plot based on the selected x-axis variable
