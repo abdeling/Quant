@@ -158,7 +158,7 @@ with col_rad2 :
 # Create columns for the controls and the plot
 col_controls, col_plot = st.columns([1, 3])  # 1:3 ratio for controls and plot
 
-with col_controls:
+with col_controls (border = True):
     # Controls for the plot
     visualization = st.selectbox("Metric to Plot:", ["Price","Delta", "Gamma", "Theta"])
     
